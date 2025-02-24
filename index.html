@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TerraBox Video Player</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+    }
+    video {
+      width: 80%;
+      max-width: 800px;
+    }
+    input, button {
+      padding: 10px;
+      margin: 5px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <div>
+    <h1>Enter TerraBox Video URL</h1>
+    <input type="text" id="videoUrl" placeholder="Enter TerraBox video URL" style="width: 300px;">
+    <button onclick="loadVideo()">Load Video</button>
+
+    <div id="videoContainer" style="margin-top: 20px; display: none;">
+      <video id="terraVideo" controls>
+        <source id="videoSource" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+
+  <script>
+    function loadVideo() {
+      // Get the video URL from the input
+      const url = document.getElementById('videoUrl').value;
+      
+      // Validate the URL
+      if (url.trim() === "") {
+        alert("Please enter a valid TerraBox video URL.");
+        return;
+      }
+
+      // Assuming the video URL is valid and directly points to the video file
+      const videoElement = document.getElementById('terraVideo');
+      const sourceElement = document.getElementById('videoSource');
+      
+      // Set the source of the video element to the provided URL
+      sourceElement.src = url;
+
+      // Reload the video source to reflect the new URL
+      videoElement.load();
+
+      // Show the video player container
+      document.getElementById('videoContainer').style.display = "block";
+
+      // Optionally, play the video immediately after loading
+      videoElement.play();
+    }
+  </script>
+
+</body>
+</html>
